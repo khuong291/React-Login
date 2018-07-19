@@ -11,16 +11,8 @@ class App extends React.Component {
         <BrowserRouter>
           <div className="container">
             <Header />
-            <Route
-              exact={true}
-              path="https://khuong291.github.io/React-Login"
-              component={Login}
-            />
-            <Route
-              exact={true}
-              path="https://khuong291.github.io/React-Login/dashboard"
-              component={Dashboard}
-            />
+            <Route exact={true} path="/" component={Login} />
+            <Route exact={true} path="/dashboard" component={Dashboard} />
           </div>
         </BrowserRouter>
       </div>

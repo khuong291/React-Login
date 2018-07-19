@@ -26,7 +26,7 @@ class Login extends React.Component<IProps> {
   };
 
   public onLogin = () => {
-    window.location.href = "https://khuong291.github.io/React-Login/dashboard";
+    window.location.href = "/dashboard";
     this.props.dispatch({
       payload: "Khuong",
       type: TYPES.LOGIN

@@ -17,7 +17,7 @@ class Header extends React.Component<IProps> {
   public render() {
     return (
       <NavBar>
-        <WrapperLink to="https://khuong291.github.io/React-Login">
+        <WrapperLink to="/">
           {this.props.userName !== "" ? "Logout" : ""}
         </WrapperLink>
       </NavBar>
