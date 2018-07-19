@@ -1,8 +1,8 @@
 {
-  "name": "login",
+  "name": "React-Login",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://khuong291.github.io/login",
+  "homepage": "http://khuong291.github.io/React-Login",
   "dependencies": {
     "@types/react-redux": "^6.0.4",
     "@types/react-router-dom": "^4.2.7",
