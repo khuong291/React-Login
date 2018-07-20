@@ -40,7 +40,6 @@ class Header extends React.Component<Props> {
 
   render() {
     const userName = window.localStorage.getItem("userName");
-    console.log("===", userName);
     return (
       <NavBar>
         <LogoutButton onClick={this.onLogout}>

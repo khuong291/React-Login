@@ -15,27 +15,54 @@ interface Props {
   dispatch: Dispatch<Action>;
 }
 
-class Login extends React.Component<Props> {
-  state = {
-    shouldShowForm: false
-  };
+interface State {
+  userName: string;
+  password: string;
+}
+
+class Login extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      userName: "",
+      password: ""
+    };
+
+    this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onChangePassword = this.onChangePassword.bind(this);
+  }
 
   onLogin = () => {
-    window.localStorage.setItem("userName", "Khuong");
-    const userName = window.localStorage.getItem("userName");
-    console.log("===", userName);
-    this.props.dispatch({
-      payload: "Khuong",
-      type: LOGIN
-    });
-    window.location.href = "/dashboard";
+    const { userName, password } = this.state;
+    if (userName === "user1" && password === "password1") {
+      window.localStorage.setItem("userName", userName);
+      this.props.dispatch({
+        payload: userName,
+        type: LOGIN
+      });
+      window.location.href = "/dashboard";
+      return;
+    }
+    alert("Invalid username or wrong password!");
   };
+
+  onChangeUsername(e: React.FormEvent<HTMLInputElement>) {
+    this.setState({
+      userName: e.currentTarget.value
+    });
+  }
+
+  onChangePassword(e: React.FormEvent<HTMLInputElement>) {
+    this.setState({
+      password: e.currentTarget.value
+    });
+  }
 
   render() {
     return (
       <Container>
-        <Form placeholder="Enter Username" />
-        <Form placeholder="Enter Password" />
+        <Form placeholder="Enter Username" onChange={this.onChangeUsername} />
+        <Form placeholder="Enter Password" onChange={this.onChangePassword} />
         <LoginButton onClick={this.onLogin}>Login</LoginButton>
       </Container>
     );
