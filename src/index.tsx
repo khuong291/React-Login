@@ -8,10 +8,6 @@ import registerServiceWorker from "./registerServiceWorker";
 
 const store = createStore(reducers, {}, applyMiddleware());
 
-export interface IState {
-  userName: string;
-}
-
 ReactDOM.render(
   <Provider store={store}>
     <App />

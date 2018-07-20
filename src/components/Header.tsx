@@ -1,25 +1,51 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Dispatch } from "redux";
 import styled from "styled-components";
 import * as COLORS from "../constants/colors";
-import { IState } from "../index";
+import { LOGIN, AuthState, Action } from "../actions/types";
+import { returntypeof } from "react-redux-typescript";
 
-const mapStateToProps = (state: IState) => {
-  return { userName: state.userName };
+const mapStateToProps = (state: AuthState) => {
+  const { userName } = state.auth;
+  return { userName };
 };
 
-interface IProps {
-  userName: string;
+const mapDispatchToProps = (dispatch: Dispatch<Action>) => {
+  return {
+    dispatch
+  };
+};
+
+interface MapDispatchToProps {
+  dispatch: Dispatch<Action>;
 }
 
-class Header extends React.Component<IProps> {
-  public render() {
+const stateProps = returntypeof(mapStateToProps);
+type MapStateToProps = typeof stateProps;
+type Props = MapStateToProps & MapDispatchToProps;
+
+class Header extends React.Component<Props> {
+  componentDidMount() {
+    window.localStorage.removeItem("userName");
+  }
+
+  onLogout = () => {
+    window.location.href = "/";
+    this.props.dispatch({
+      payload: "",
+      type: LOGIN
+    });
+  };
+
+  render() {
+    const userName = window.localStorage.getItem("userName");
+    console.log("===", userName);
     return (
       <NavBar>
-        <WrapperLink to="/">
-          {this.props.userName !== "" ? "Logout" : ""}
-        </WrapperLink>
+        <LogoutButton onClick={this.onLogout}>
+          {userName ? "Logout" : ""}
+        </LogoutButton>
       </NavBar>
     );
   }
@@ -30,14 +56,17 @@ const NavBar = styled.div`
   height: 40px;
 `;
 
-const WrapperLink = styled(Link)`
+const LogoutButton = styled.button`
   float: right;
   text-decoration: none;
   margin: 2px 20px 2px 0;
   font-size: 25px;
+  outline: none;
+  background-color: transparent;
+  border: none;
 `;
 
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(Header);

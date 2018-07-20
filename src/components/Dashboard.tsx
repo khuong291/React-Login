@@ -1,12 +1,8 @@
 import * as React from "react";
 
 class Dashboard extends React.Component {
-  public render() {
-    return (
-      <nav>
-        <div>Dashboard</div>
-      </nav>
-    );
+  render() {
+    return <h1>Dashboard</h1>;
   }
 }
 

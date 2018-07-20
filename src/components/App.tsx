@@ -5,7 +5,7 @@ import Header from "./Header";
 import Login from "./Login";
 
 class App extends React.Component {
-  public render() {
+  render() {
     return (
       <div>
         <BrowserRouter>

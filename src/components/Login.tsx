@@ -2,38 +2,36 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import styled from "styled-components";
-import * as TYPES from "../actions/types";
+import { LOGIN, Action } from "../actions/types";
 import * as COLORS from "../constants/colors";
 
-interface IAction {
-  payload: string;
-  type: string;
-}
-
-const mapDispatchToProps = (dispatch: Dispatch<IAction>) => {
+const mapDispatchToProps = (dispatch: Dispatch<Action>) => {
   return {
     dispatch
   };
 };
 
-interface IProps {
-  dispatch: Dispatch<IAction>;
+interface Props {
+  dispatch: Dispatch<Action>;
 }
 
-class Login extends React.Component<IProps> {
-  public state = {
+class Login extends React.Component<Props> {
+  state = {
     shouldShowForm: false
   };
 
-  public onLogin = () => {
-    window.location.href = "/dashboard";
+  onLogin = () => {
+    window.localStorage.setItem("userName", "Khuong");
+    const userName = window.localStorage.getItem("userName");
+    console.log("===", userName);
     this.props.dispatch({
       payload: "Khuong",
-      type: TYPES.LOGIN
+      type: LOGIN
     });
+    window.location.href = "/dashboard";
   };
 
-  public render() {
+  render() {
     return (
       <Container>
         <Form placeholder="Enter Username" />

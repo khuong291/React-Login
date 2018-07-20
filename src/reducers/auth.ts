@@ -1,9 +1,13 @@
-import { LOGIN } from "../actions/types";
+import { LOGIN, AuthState, Action } from "../actions/types";
 
-export default function(
-  state = { userName: "" },
-  action: { type: string; payload: string }
-) {
+const defaultState = {
+  auth: {
+    userName: ""
+  }
+};
+
+export default function(state: AuthState = defaultState, action: Action) {
+  console.log(action);
   switch (action.type) {
     case LOGIN:
       return {
